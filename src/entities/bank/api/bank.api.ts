@@ -44,7 +44,7 @@ export class Bank {
 
   static store(data: object): any {} // DEV
 
-  update(data: object): any {
+  async update(data: object): Promise<any> {
     api.put(Bank.config.url + "/" + this.id, { params: { ...data } });
   }
 

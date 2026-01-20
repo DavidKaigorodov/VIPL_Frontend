@@ -4,12 +4,14 @@ import { Table } from "@/shared/ui/table";
 import TableCell from "../../../shared/ui/table/TableCell.vue";
 import { DeleteButton } from "../../../shared/ui/buttons";
 import type { TModelClass } from "@/shared/types/global";
+import EditButton from "@/shared/ui/buttons/EditButton.vue";
 
 export default defineComponent({
   components: {
     Table,
     TableCell,
     DeleteButton,
+    EditButton,
   },
 
   props: {
@@ -107,7 +109,11 @@ export default defineComponent({
                 v-if="getRowActions(row).destroy"
                 @click="row.destroy?.()"
               />
-              
+              <EditButton
+                v-if="getRowActions(row).edit"
+                :href="model.config.url + '/' + row.id + '/edit'"
+              />
+              {{ console.log(getRowActions(row).edit) }}
             </div>
           </template>
         </TableCell>

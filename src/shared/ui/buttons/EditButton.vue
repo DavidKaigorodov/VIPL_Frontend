@@ -10,12 +10,11 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    params: Object,
   },
 });
 </script>
 <template>
-  <NavLink :to="{ name: href, params: params }">
+  <NavLink :to="href">
     <PenIco />
   </NavLink>
 </template>
