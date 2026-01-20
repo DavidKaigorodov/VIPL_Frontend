@@ -105,15 +105,14 @@ export default defineComponent({
         <TableCell :row="row" :columns="columns">
           <template #cell>
             <div class="actions-wrapper">
-              <DeleteButton
-                v-if="getRowActions(row).destroy"
-                @click="row.destroy?.()"
-              />
               <EditButton
                 v-if="getRowActions(row).edit"
                 :href="model.config.url + '/' + row.id + '/edit'"
               />
-              {{ console.log(getRowActions(row).edit) }}
+              <DeleteButton
+                v-if="getRowActions(row).destroy"
+                @click="row.destroy?.()"
+              />
             </div>
           </template>
         </TableCell>

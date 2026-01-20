@@ -3,12 +3,18 @@ export interface Bank {
   name: string;
   code: string;
   contract_id: number;
-  config: object;
+  cconfig: {
+    paginate?: number;
+    url: string;
+  };
 }
-export type TBank = {
+export interface TBank {
   id: number;
   name: string;
   code: string;
   contract_id: number;
-  config: Record<string, { paginate?: number; url: string }>;
-};
+  config: {
+    paginate?: number;
+    url: string;
+  };
+}
