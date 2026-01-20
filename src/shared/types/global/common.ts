@@ -145,7 +145,10 @@ export interface IModelInstance {
 
 export type TModelClass = {
   new (...args: any[]): IModelInstance;
-  config: Record<string, { paginate?: number; url: string }>;
+  config: {
+    paginate?: number;
+    url: string;
+  };
   getAny(page?: number): Promise<{ data: any[]; meta?: any }>;
   fillable: Record<string, { label: string; type: string }>;
   store?(data: any): any;

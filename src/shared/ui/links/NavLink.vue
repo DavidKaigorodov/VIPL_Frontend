@@ -1,10 +1,10 @@
 <script lang="ts">
-import { defineComponent, type StyleValue } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   props: {
     to: {
-      type: Object,
+      type: String,
       required: true,
     },
     styles: {
