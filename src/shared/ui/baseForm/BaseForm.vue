@@ -28,7 +28,7 @@ export default defineComponent({
 
 <template>
   <div :class="['form-container', name]">
-    <form @submit="handleSubmit" :class="['form', name]">
+    <form @submit.prevent="handleSubmit" :class="['form', name]">
       <h3 v-if="header" class="form-header">
         {{ header }}
       </h3>
