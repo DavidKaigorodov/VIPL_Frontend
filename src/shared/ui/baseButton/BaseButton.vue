@@ -7,9 +7,6 @@ export default defineComponent({
     name: {
       type: String as PropType<TPrimitive>,
     },
-    buttonText: {
-      type: String as PropType<TPrimitive>,
-    },
     disabled: {
       type: Boolean,
     },
@@ -19,7 +16,9 @@ export default defineComponent({
     styles: {
       type: Object,
       required: false,
-      default: () => [{ background: "var(--blue-button-background-color)" }],
+      default: () => [
+        { backgroundColor: "var(--green-button-background-color)" },
+      ],
     },
     handleClick: {
       type: Function as PropType<TFn>,
@@ -29,8 +28,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="button-container" :style="styles">
-    <button :class="['button', name]" @click="handleClick" :disabled>
+  <div :class="['button-container', name]" :style="styles">
+    <button class="button" @click="handleClick" :disabled>
       <slot />
     </button>
   </div>
@@ -38,7 +37,5 @@ export default defineComponent({
 
 <style lang="sass">
 .button-container
-    color: var(--button-color)
-    border-radius: 7px
-    cursor: pointer
+    border-radius: 8px
 </style>

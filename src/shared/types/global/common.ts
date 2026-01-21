@@ -154,3 +154,10 @@ export type TModelClass = {
   store?(data: any): any;
   show?(id: number): any;
 };
+export type TResourceField = {
+  name: string;
+  label: string;
+  type: "text" | "number" | "password" | "email";
+  placeholder?: string;
+  disabled?: boolean;
+};
