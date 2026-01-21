@@ -23,7 +23,7 @@ export default defineComponent({
 <template>
   <BaseButton
     @click="destroy"
-    :styles="{ background: 'var(--red-button-background-color)' }"
+    :styles="{ backgroundColor: 'var(--red-button-background-color)' }"
   >
     <TrashIco />
   </BaseButton>

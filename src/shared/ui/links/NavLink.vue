@@ -10,7 +10,7 @@ export default defineComponent({
     styles: {
       type: Object,
       required: false,
-      default: () => ({ background: "var(--blue-button-background-color" }),
+      default: () => ({ backgroundColor: "var(--blue-button-background-color" }),
     },
   },
 });
@@ -26,7 +26,9 @@ export default defineComponent({
 
 <style scoped lang="sass">
 .link-container
-  color: var(--button-color)
-  border-radius: 7px
-  cursor: pointer
+    color: var(--button-color)
+    border-radius: 8px
+    cursor: pointer
+    align-items: center
+    justify-content: center
 </style>
