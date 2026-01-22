@@ -3,7 +3,7 @@ export interface Bank {
   name: string;
   code: string;
   contract_id: number;
-  cconfig: {
+  config: {
     paginate?: number;
     url: string;
   };

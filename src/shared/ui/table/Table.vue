@@ -31,6 +31,10 @@ export default defineComponent({
       </template>
     </div>
 
+    <div class="toolbar" v-if="'toolbar' in $slots">
+      <slot name="toolbar"></slot>
+    </div>
+
     <div class="table-border-wrapper">
       <table class="table">
         <thead v-if="'thead' in $slots || Array.isArray(headers)">

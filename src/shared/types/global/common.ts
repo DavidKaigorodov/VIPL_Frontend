@@ -139,7 +139,7 @@ export type TTableColumn = {
 
 export interface IModelInstance {
   id?: number;
-  update?(data?: any): Promise<any>;
+  update(data?: any): Promise<any>;
   destroy?(id?: number): Promise<any>;
 }
 
@@ -149,10 +149,11 @@ export type TModelClass = {
     paginate?: number;
     url: string;
   };
-  getAny(page?: number): Promise<{ data: any[]; meta?: any }>;
-  fillable: Record<string, { label: string; type: string }>;
+  getAny(page?: number): Promise<{ data: any[] }>;
+  attributes: TResourceField[];
   store?(data: any): any;
-  show?(id: number): any;
+  show?(id: any): any;
+  get(id: number): any;
 };
 export type TResourceField = {
   name: string;
@@ -160,4 +161,10 @@ export type TResourceField = {
   type: "text" | "number" | "password" | "email";
   placeholder?: string;
   disabled?: boolean;
+  value?: any;
+};
+export type TPaginationResponse<T> = {
+  data: T[];
+  links: Record<string, any>;
+  meta: Record<string, any>;
 };

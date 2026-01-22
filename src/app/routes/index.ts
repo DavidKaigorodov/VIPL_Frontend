@@ -1,7 +1,9 @@
-import Banks from "@/pages/banks/ui/index.vue";
-import BanksEdit from "@/pages/banks/ui/edit.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import type { TLayout } from "@/shared/types/ui/layout";
+
+import Banks from "@/pages/banks/ui/index.vue";
+import BanksEdit from "@/pages/banks/ui/edit.vue";
+import BanksCreate from "@/pages/banks/ui/create.vue";
 
 const routes = [
   {
@@ -16,7 +18,7 @@ const routes = [
   },
   {
     path: "/banks/create",
-    component: Banks,
+    component: BanksCreate,
     meta: { layout: "auth" as TLayout },
   },
 ];

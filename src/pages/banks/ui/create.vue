@@ -1,10 +1,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ModelTable } from "@/widgets/moduleTable";
 import { Bank } from "@/entities/bank/api/bank.api";
+import ModelForm from "@/widgets/modelForm/ui/ModelForm.vue";
 
 export default defineComponent({
-  components: { ModelTable },
+  components: {
+    ModelForm,
+  },
   setup() {
     return { Bank };
   },
@@ -12,5 +14,5 @@ export default defineComponent({
 </script>
 
 <template>
-  <ModelTable header="Банки" :model="Bank" />
+  <ModelForm header="Создать" :model="Bank" submitMode="create" />
 </template>

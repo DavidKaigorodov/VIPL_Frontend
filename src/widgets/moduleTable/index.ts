@@ -1,1 +1,1 @@
-export { default as ModuleTable } from "./ui/ModalTable.vue";
+export { default as ModelTable } from "./ui/ModelTable.vue";
