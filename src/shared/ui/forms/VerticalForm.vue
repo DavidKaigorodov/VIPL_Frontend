@@ -1,17 +1,24 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
 import BaseForm from "../baseForm/BaseForm.vue";
+import type { TSubmitFn } from "@/shared/types/global";
 
 export default defineComponent({
   components: { BaseForm },
   props: {
-    header: String,
+    header: {
+      type: String,
+      default: "",
+    },
     data: Array as PropType<any[] | null>,
+    onSubmit: {
+      type: Function as PropType<TSubmitFn>,
+    },
   },
 });
 </script>
 <template>
-  <BaseForm :header="header" :data="data" name="vertical-form">
+  <BaseForm :onSubmit="onSubmit" :header="header" :data="data" name="vertical-form">
     <template #form-body>
       <slot name="form-body" />
     </template>

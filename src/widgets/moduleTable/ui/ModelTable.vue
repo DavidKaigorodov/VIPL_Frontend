@@ -1,10 +1,11 @@
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted, type PropType } from "vue";
+import { defineComponent, type PropType } from "vue";
 import { Table } from "@/shared/ui/table";
 import TableCell from "../../../shared/ui/table/TableCell.vue";
 import { DeleteButton } from "../../../shared/ui/buttons";
-import type { TModelClass } from "@/shared/types/global";
 import EditButton from "@/shared/ui/buttons/EditButton.vue";
+import type { TModelClass } from "@/shared/types/global";
+import CreateButton from "@/shared/ui/buttons/CreateButton.vue";
 
 export default defineComponent({
   components: {
@@ -12,6 +13,7 @@ export default defineComponent({
     TableCell,
     DeleteButton,
     EditButton,
+    CreateButton,
   },
 
   props: {
@@ -26,59 +28,54 @@ export default defineComponent({
     hasCreate: { type: Boolean },
   },
 
-  setup(props) {
-    const rows = ref<any[]>([]);
+  data() {
+    return {
+      rows: [] as any[],
+    };
+  },
 
-    const columns = computed(() =>
-      props.model
-        ? Object.entries(props.model.fillable).map(([key, field]) => ({
-            key,
-            label: field.label,
-          }))
-        : []
-    );
+  computed: {
+    columns(): { key: string; label: string }[] {
+      if (!this.model) return [];
+      return this.model.attributes.map((field: any) => ({
+        key: field.name,
+        label: field.label,
+      }));
+    },
 
-    const getRowActions = (row: any) => ({
-      edit: props.hasEdit ? props.hasEdit : typeof row.update === "function",
-      destroy: props.hasDelete
-        ? props.hasDelete
-        : typeof row.destroy === "function",
-      show: props.hasShow
-        ? props.hasShow
-        : typeof props.model?.show === "function",
-      create: props.hasCreate
-        ? props.hasCreate
-        : typeof props.model?.store === "function",
-    });
+    hasActions(): boolean {
+      return this.rows.some((row) =>
+        Object.values(this.getRowActions(row)).some(Boolean),
+      );
+    },
+  },
 
-    const hasActions = computed(() =>
-      rows.value.some((row) => Object.values(getRowActions(row)).some(Boolean))
-    );
+  methods: {
+    getRowActions(row: any) {
+      return {
+        edit: this.hasEdit ? this.hasEdit : typeof row.update === "function",
+        destroy: this.hasDelete
+          ? this.hasDelete
+          : typeof row.destroy === "function",
+        show: this.hasShow
+          ? this.hasShow
+          : typeof this.model?.show === "function",
+      };
+    },
 
-    const load = async () => {
-      if (!props.model) {
-        rows.value = [];
+    async load() {
+      if (!this.model) {
+        this.rows = [];
         return;
       }
 
-      const response = await props.model.getAny();
-      rows.value = response.data.map((obj: any) => {
-        try {
-          return new props.model(...Object.values(obj));
-        } catch {
-          return obj;
-        }
-      });
-    };
+      const response = await this.model.getAny();
+      this.rows = response.data;
+    },
+  },
 
-    onMounted(load);
-
-    return {
-      rows,
-      columns,
-      getRowActions,
-      hasActions,
-    };
+  mounted() {
+    this.load();
   },
 });
 </script>
@@ -94,6 +91,10 @@ export default defineComponent({
 
         <th v-if="columns.length === 0"></th>
       </tr>
+    </template>
+
+    <template #toolbar>
+      <CreateButton :href="model.config.url + '/create'" />
     </template>
 
     <template #tbody>

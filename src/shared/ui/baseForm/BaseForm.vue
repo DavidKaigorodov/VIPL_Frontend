@@ -15,7 +15,7 @@ export default defineComponent({
       type: Array as () => Array<object> | null,
       default: null,
     },
-    handleSubmit: {
+    onSubmit: {
       type: Function as PropType<TSubmitFn>,
     },
   },
@@ -24,7 +24,7 @@ export default defineComponent({
 
 <template>
   <div class="form-container">
-    <form @submit.prevent="handleSubmit" :class="['form', name]">
+    <form @submit.prevent="onSubmit" :class="['form', name]">
       <h3 class="form-header" v-if="header !== ''">
         {{ header }}
       </h3>

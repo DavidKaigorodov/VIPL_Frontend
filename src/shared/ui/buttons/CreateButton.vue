@@ -1,21 +1,20 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import NavLink from "../links/NavLink.vue";
-import PenIco from "../icons/PenIco.vue";
+import PlusIco from "../icons/PlusIco.vue";
 
 export default defineComponent({
-  component: { NavLink, PenIco },
+  components: { NavLink, PlusIco },
   props: {
     href: {
       type: String,
       required: true,
     },
-    params: Object,
   },
 });
 </script>
 <template>
-  <NavLink :to="{ name: href, params: params }">
-    <PenIco />
+  <NavLink :to="href">
+    <PlusIco />
   </NavLink>
 </template>
