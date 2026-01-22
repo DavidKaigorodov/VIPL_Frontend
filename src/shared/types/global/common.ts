@@ -158,7 +158,7 @@ export type TModelClass = {
 export type TResourceField = {
   name: string;
   label: string;
-  type: "text" | "number" | "password" | "email";
+  type: "text" | "number" | "password" | "email" | "date" | TModelClass;
   placeholder?: string;
   disabled?: boolean;
   value?: any;

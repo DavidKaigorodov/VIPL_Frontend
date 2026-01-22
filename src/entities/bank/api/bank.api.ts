@@ -1,4 +1,8 @@
-import type { TPaginationResponse, TResourceField } from "@/shared/types/global";
+import { Contract } from "@/entities/templates/api/contract.api";
+import type {
+  TPaginationResponse,
+  TResourceField,
+} from "@/shared/types/global";
 
 export class Bank {
   static config = {
@@ -9,22 +13,26 @@ export class Bank {
   static attributes: TResourceField[] = [
     { name: "name", label: "Наименование", type: "text" },
     { name: "code", label: "Код", type: "text" },
-    { name: "contract_id", label: "contract_id", type: "number" },
+    { name: "contract_number", label: "Контракт", type: "text" },
   ];
 
   id: number = 0;
   name: string = "";
   code: string = "";
-  contract_id: number = 6;
+  contract: Contract = new Contract();
 
   constructor(data: Partial<Bank> = {}) {
     Object.assign(this, {
       id: 0,
       name: "",
       code: "",
-      contract_id: 6,
+      contract: new Contract(),
       ...data,
     });
+  }
+
+  get contract_number(): string {
+    return this.contract?.number ?? "";
   }
 
   static async getAny(page: number = 1): Promise<TPaginationResponse<Bank>> {
@@ -41,14 +49,13 @@ export class Bank {
 
   static async get(id: number): Promise<Bank | undefined> {
     const banks = await Bank.getAny();
-    
+
     return banks.data.find((b) => b.id === id);
   }
 
   static async store(data: Partial<Bank>): Promise<any> {
     const response = await api.post(Bank.config.url, data);
-    console.log(response);
-    
+
     return response.data;
   }
 
